@@ -18,7 +18,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle
-        # Ми прибрали окремий крок "Setup Gradle", 
-        # тому що він викликає конфлікти з версіями.
-        # Використовуємо стандартний виклик через gradlew
-        run: chmod +x gradlew && ./gradlew assembleDebug
+        # Використовуємо прямий виклик gradle, без ./gradlew
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
