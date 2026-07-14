@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,20 +18,17 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Цей крок виправляє проблему, якщо файлів gradlew немає в репозиторії
-      - name: Ensure Gradle Wrapper exists
+      # Виводимо структуру папок, щоб побачити, де лежать файли
+      - name: List files
+        run: ls -R
+
+      - name: Ensure Gradle Wrapper
         run: |
           if [ ! -f "gradlew" ]; then
-            echo "Gradlew not found, generating wrapper..."
             gradle wrapper --gradle-version 8.9
           fi
           chmod +x ./gradlew
 
+      # Запускаємо з максимальними подробицями
       - name: Build Debug APK
-        run: ./gradlew clean assembleDebug --no-daemon
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+        run: ./gradlew assembleDebug --stacktrace --info
