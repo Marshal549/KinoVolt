@@ -1,7 +1,5 @@
 name: Android Build
-
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,4 +11,4 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
