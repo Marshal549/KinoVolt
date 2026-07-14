@@ -1,20 +1,26 @@
-plugins {
-    id 'com.android.application'
-}
+name: Build APK
 
-android {
-    namespace 'com.marshal549.kinovolt'
-    compileSdk 34
+on:
+  push:
+    branches: [ "main" ]
 
-    defaultConfig {
-        applicationId "com.marshal549.kinovolt"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
-}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-dependencies {
-    // Тут додаватимуться ваші бібліотеки
-}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
