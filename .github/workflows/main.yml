@@ -17,11 +17,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      # Цей крок встановлює Gradle у середовище GitHub
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: '8.5'
+          gradle-version: '8.9'
 
+      # Викликаємо gradle безпосередньо, без ./gradlew
       - name: Build with Gradle
         run: gradle assembleDebug
 
