@@ -3,8 +3,9 @@ plugins {
 }
 
 android {
+    namespace 'com.marshal549.kinovolt'
     compileSdk 34
-    
+
     defaultConfig {
         applicationId "com.marshal549.kinovolt"
         minSdk 21
@@ -12,23 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
     }
-
-    buildTypes {
-        release {
-            debuggable false
-        }
-        debug {
-            debuggable true
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
